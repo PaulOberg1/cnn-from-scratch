@@ -1,0 +1,15 @@
+# Ignore build artifacts
+/build/
+
+# Ignore system and editor files
+.vscode/
+*.suo
+*.pdb
+*.pidb
+*.ilk
+*.msvc*
+*.user
+*.sln.docstates
+
+# Ignore Eigen build artifacts
+/eigen/build/
