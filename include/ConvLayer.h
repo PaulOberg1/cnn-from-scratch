@@ -13,11 +13,13 @@ public:
 
     void initWeights(int prevMatLength, int kernelLength);
 
-    void forwardProp();
+    void forwardProp(Eigen::MatrixXf X);
 
     void backProp();
     
     void gradDesc();
+    
+    Eigen::MatrixXf getA();
 };
 
 #endif

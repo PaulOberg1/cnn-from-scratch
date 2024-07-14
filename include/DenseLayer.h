@@ -13,11 +13,13 @@ public:
 
     void initWeights(int prevLayerNodes, int curLayerNodes);
 
-    void forwardProp();
+    void forwardProp(Eigen::MatrixXf X);
 
     void backProp();
 
     void gradDesc();
+
+    Eigen::MatrixXf getA();
     
 };
 

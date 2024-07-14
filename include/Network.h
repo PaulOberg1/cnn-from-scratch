@@ -1,6 +1,9 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
+#include "ConvLayer.h"
+#include "DenseLayer.h"
+
 #include <map>
 #include <string>
 #include <utility>
@@ -8,22 +11,21 @@
 
 class Network{
 private:
-    Eigen::MatrixXf convKernels;
-    Eigen::MatrixXf convBiases;
-
-    Eigen::MatrixXf denseWeights;
-    Eigen::MatrixXf denseBiases;
+    ConvLayer* m_convLayer1;
+    ConvLayer* m_convLayer2;
+    DenseLayer* m_denseLayer1;
+    DenseLayer* m_denseLayer2;
 
 public:
-    Network(std::map<std::string,std::map<std::string,std::pair<int,int>>> dimensions) {}
+    Network(int Conv1Nodes, int Conv2Nodes, int Dense1Nodes, int Dense2Nodes);
 
-    void run() {}
+    void run(Eigen::MatrixXf X);
 
-    void forwardProp() {}
+    Eigen::MatrixXf forwardProp(Eigen::MatrixXf X);
 
-    void backProp() {}
-    
-    void gradDesc() {}
+    void backProp();
+
+    void gradDesc();
 };
 
 #endif
