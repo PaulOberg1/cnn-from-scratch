@@ -1,33 +1,23 @@
-#include <map>
-#include <string>
-#include <utility>
-#include <Eigen/Dense>
+#include "Network.h"
 
-class Network{
-    private:
-    Eigen::MatrixXf convKernels;
-    Eigen::MatrixXf convBiases;
+Network::Network(std::map<std::string,std::map<std::string,std::pair<int,int>>> dimensions) {
+    std::pair<float,float> ConvKernelDims = dimensions.at("ConvLayer").at("Kernels");
+    std::pair<float,float> ConvBiasDims = dimensions.at("ConvLayer").at("Biases");
 
-    Eigen::MatrixXf denseWeights;
-    Eigen::MatrixXf denseBiases;
+    std::pair<float,float> DenseWeightDims = dimensions.at("DenseLayer").at("Kernels");
+    std::pair<float,float> DenseBiasDims = dimensions.at("DenseLayer").at("Biases");
 
-    public:
-    Network(std::map<std::string,std::map<std::string,std::pair<int,int>>> dimensions) {
-        std::pair<float,float> ConvKernelDims = dimensions.at("ConvLayer").at("Kernels");
-        std::pair<float,float> ConvBiasDims = dimensions.at("ConvLayer").at("Biases");
+    convKernels = Eigen::MatrixXf::Random(ConvKernelDims.first,ConvKernelDims.second);
+    convBiases = Eigen::MatrixXf::Random(ConvBiasDims.first,ConvBiasDims.second);
 
-        std::pair<float,float> DenseWeightDims = dimensions.at("DenseLayer").at("Kernels");
-        std::pair<float,float> DenseBiasDims = dimensions.at("DenseLayer").at("Biases");
+    denseWeights = Eigen::MatrixXf::Random(DenseWeightDims.first,DenseWeightDims.second);
+    denseBiases = Eigen::MatrixXf::Random(DenseBiasDims.first,DenseBiasDims.second);
+}
 
-        convKernels = Eigen::MatrixXf::Random(ConvKernelDims.first,ConvKernelDims.second);
-        convBiases = Eigen::MatrixXf::Random(ConvBiasDims.first,ConvBiasDims.second);
+void Network::run() {}
 
-        denseWeights = Eigen::MatrixXf::Random(DenseWeightDims.first,DenseWeightDims.second);
-        denseBiases = Eigen::MatrixXf::Random(DenseBiasDims.first,DenseBiasDims.second);
+void Network::forwardProp() {}
 
-    }
-    void run() {}
-    void forwardProp() {}
-    void backProp() {}
-    void gradDesc() {}
-};
+void Network::backProp() {}
+
+void Network::gradDesc() {}
