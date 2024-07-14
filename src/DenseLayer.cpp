@@ -1,18 +1,16 @@
-#include <Eigen/Dense>
+#include "DenseLayer.h"
 
-class DenseLayer{
-    private:
+DenseLayer::DenseLayer(int prevLayerNodes, int curLayerNodes) {
+    initWeights(prevLayerNodes,curLayerNodes);
+}
 
-    Eigen::MatrixXf weights;
-    Eigen::MatrixXf biases;
+void DenseLayer::initWeights(int prevLayerNodes, int curLayerNodes) {
+    weights = Eigen::MatrixXf::Random(curLayerNodes,prevLayerNodes);
+    biases = Eigen::MatrixXf::Random(curLayerNodes);
+}
 
-    public:
-    DenseLayer(int prevLayerNodes, int curLayerNodes) {
-        initWeights(prevLayerNodes,curLayerNodes);
-    }
+void DenseLayer::forwardProp() {}
 
-    void initWeights(int prevLayerNodes, int curLayerNodes) {
-        weights = Eigen::MatrixXf::Random(curLayerNodes,prevLayerNodes);
-        biases = Eigen::MatrixXf::Random(curLayerNodes);
-    }
-};
+void DenseLayer::backProp() {}
+
+void DenseLayer::gradDesc() {}
