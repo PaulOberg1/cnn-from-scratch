@@ -9,8 +9,10 @@ void DenseLayer::initWeights(int prevLayerNodes, int curLayerNodes) {
     biases = Eigen::MatrixXf::Random(curLayerNodes);
 }
 
-void DenseLayer::forwardProp() {}
+void DenseLayer::forwardProp(Eigen::MatrixXf X) {}
 
 void DenseLayer::backProp() {}
 
 void DenseLayer::gradDesc() {}
+
+Eigen::MatrixXf DenseLayer::getA() {}
