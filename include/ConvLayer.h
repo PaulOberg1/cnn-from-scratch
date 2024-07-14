@@ -3,13 +3,21 @@
 
 #include <Eigen/Dense>
 
+using MatTransformFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&)>;
+
 class ConvLayer{
 private:
-    Eigen::MatrixXf kernels;
-    Eigen::MatrixXf biases;
+    Eigen::MatrixXf m_kernels;
+    Eigen::MatrixXf m_biases;
+    MatTransformFunc m_activation;
+    MatTransformFunc m_pool;
+
+    Eigen::MatrixXf m_Z;
+    Eigen::MatrixXf m_A;
+    Eigen::MatrixXf m_P;
 
 public:
-    ConvLayer(int prevMatLength, int kernelLength);
+    ConvLayer(int prevMatLength, int kernelLength, const MatTransformFunc& activation, const MatTransformFunc& pool);
 
     void initWeights(int prevMatLength, int kernelLength);
 
@@ -19,7 +27,9 @@ public:
     
     void gradDesc();
     
+    Eigen::MatrixXf getZ();
     Eigen::MatrixXf getA();
+    Eigen::MatrixXf getP();
 };
 
 #endif
