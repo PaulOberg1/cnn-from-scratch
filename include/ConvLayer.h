@@ -9,15 +9,15 @@ private:
     Eigen::MatrixXf biases;
 
 public:
-    ConvLayer(int prevMatLength, int kernelLength) {}
+    ConvLayer(int prevMatLength, int kernelLength);
 
-    void initWeights(int prevMatLength, int kernelLength) {}
+    void initWeights(int prevMatLength, int kernelLength);
 
-    void forwardProp() {}
+    void forwardProp();
 
-    void backProp() {}
+    void backProp();
     
-    void gradDesc() {}
+    void gradDesc();
 };
 
 #endif

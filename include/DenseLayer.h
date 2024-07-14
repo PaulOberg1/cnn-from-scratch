@@ -9,15 +9,15 @@ private:
     Eigen::MatrixXf biases;
 
 public:
-    DenseLayer(int prevLayerNodes, int curLayerNodes) {}
+    DenseLayer(int prevLayerNodes, int curLayerNodes);
 
-    void initWeights(int prevLayerNodes, int curLayerNodes) {}
+    void initWeights(int prevLayerNodes, int curLayerNodes);
 
-    void forwardProp() {}
+    void forwardProp();
 
-    void backProp() {}
+    void backProp();
 
-    void gradDesc() {}
+    void gradDesc();
     
 };
 
