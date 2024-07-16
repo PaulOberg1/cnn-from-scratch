@@ -1,7 +1,7 @@
 #ifndef DENSELAYER_H
 #define DENSELAYER_H
 
-#include "helper_functions/GetFuncDeriv.h"
+//#include "helper_functions/GetFuncDeriv.h"
 
 #include <Eigen/Dense>
 
