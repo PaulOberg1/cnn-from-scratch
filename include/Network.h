@@ -21,7 +21,7 @@ private:
 public:
     Network(const LayerData& layerData, Eigen::MatrixXf X);
 
-    void run(Eigen::MatrixXf X);
+    void run(Eigen::MatrixXf X, Eigen::MatrixXf Y, int numIterations, int learningRate);
 
     Eigen::MatrixXf forwardProp(Eigen::MatrixXf X);
 
