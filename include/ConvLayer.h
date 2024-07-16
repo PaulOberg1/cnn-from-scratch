@@ -16,6 +16,10 @@ private:
     Eigen::MatrixXf m_A;
     Eigen::MatrixXf m_P;
 
+    Eigen::MatrixXf m_dZ;
+    Eigen::MatrixXf m_dA;
+    Eigen::MatrixXf m_dP;;
+
 public:
     ConvLayer(int prevMatLength, int kernelLength, const MatTransformFunc& activation, const MatTransformFunc& pool);
 
@@ -25,7 +29,7 @@ public:
 
     void backProp();
     
-    void gradDesc();
+    void gradDesc(int learningRate);
     
     Eigen::MatrixXf getA();
 

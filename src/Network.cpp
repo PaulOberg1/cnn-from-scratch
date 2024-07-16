@@ -32,4 +32,9 @@ Eigen::MatrixXf Network::forwardProp(Eigen::MatrixXf X) {
 
 void Network::backProp() {}
 
-void Network::gradDesc() {}
+void Network::gradDesc(int learningRate) {
+    m_convLayer1->gradDesc(learningRate);
+    m_convLayer2->gradDesc(learningRate);
+    m_denseLayer1->gradDesc(learningRate);
+    m_denseLayer2->gradDesc(learningRate);
+}

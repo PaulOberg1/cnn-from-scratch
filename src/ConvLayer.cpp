@@ -14,7 +14,11 @@ void ConvLayer::forwardProp(Eigen::MatrixXf X) {}
 
 void ConvLayer::backProp() {}
     
-void ConvLayer::gradDesc() {}
+void ConvLayer::gradDesc(int learningRate) {
+    m_Z -= learningRate*m_dZ;
+    m_A -= learningRate*m_dA;
+    m_P -= learningRate*m_dP;
+}
 
 Eigen::MatrixXf ConvLayer::getA() {
     return m_A;

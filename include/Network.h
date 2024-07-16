@@ -27,7 +27,7 @@ public:
 
     void backProp();
 
-    void gradDesc();
+    void gradDesc(int learningRate);
 };
 
 #endif
