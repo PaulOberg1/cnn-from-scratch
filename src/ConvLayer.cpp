@@ -10,7 +10,11 @@ void ConvLayer::initWeights(int prevMatLength, int kernelLength) {
     m_biases = Eigen::MatrixXf::Random(1+prevMatLength-kernelLength);
 }
 
-void ConvLayer::forwardProp(Eigen::MatrixXf X) {}
+void ConvLayer::forwardProp(Eigen::MatrixXf X) {
+    m_Z = m_kernels * X + m_biases;
+    m_A = m_activation(m_Z);
+    m_P = m_pool(m_A);
+}
 
 void ConvLayer::backProp() {}
     
@@ -20,8 +24,16 @@ void ConvLayer::gradDesc(int learningRate) {
     m_P -= learningRate*m_dP;
 }
 
+Eigen::MatrixXf ConvLayer::getZ() {
+    return m_Z;
+}
+
 Eigen::MatrixXf ConvLayer::getA() {
     return m_A;
+}
+
+Eigen::MatrixXf ConvLayer::getP() {
+    return m_P;
 }
 
 std::pair<int,int> ConvLayer::getOutputSize(std::pair<int,int> inputDims) {
