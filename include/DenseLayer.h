@@ -1,7 +1,7 @@
 #ifndef DENSELAYER_H
 #define DENSELAYER_H
 
-#include "activations.h"
+#include "helper_functions/GetInverse.h"
 
 #include <Eigen/Dense>
 
