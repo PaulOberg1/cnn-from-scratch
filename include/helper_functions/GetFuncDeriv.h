@@ -2,11 +2,12 @@
 #define GET_FUNC_DERIV
 
 #include <Eigen/Dense>
+#include <unordered_map>
 
-template<typename... Args>
-using MatTransformFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&, Args...)>;
+using ActivationFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&)>;
+using PoolFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&, int, int)>;
 
-template<typename... Args>
-MatTransformFunc<Args...> getFuncDeriv(const MatTransformFunc<Args...>& func);
+const ActivationFunc& getActFuncDeriv(const ActivationFunc& func);
+const PoolFunc& getPoolFuncDeriv(const PoolFunc& func);
 
 #endif
