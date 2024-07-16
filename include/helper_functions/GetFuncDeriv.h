@@ -1,3 +1,6 @@
+#ifndef GET_FUNC_DERIV
+#define GET_FUNC_DERIV
+
 #include <unordered_map>
 #include <string>
 #include <functional>
@@ -5,4 +8,6 @@
 
 using MatTransformFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&)>;
 
-const MatTransformFunc& getInverse(const MatTransformFunc& func);
+const MatTransformFunc& getFuncDeriv(const MatTransformFunc& func);
+
+#endif

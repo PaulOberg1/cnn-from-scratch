@@ -1,6 +1,8 @@
 #ifndef CONVLAYER_H
 #define CONVLAYER_H
 
+#include "helper_functions/GetFuncDeriv.h"
+
 #include <Eigen/Dense>
 
 using MatTransformFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&)>;
