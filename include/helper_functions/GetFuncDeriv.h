@@ -1,13 +1,12 @@
 #ifndef GET_FUNC_DERIV
 #define GET_FUNC_DERIV
 
-#include <unordered_map>
-#include <string>
-#include <functional>
 #include <Eigen/Dense>
 
-using MatTransformFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&)>;
+template<typename... Args>
+using MatTransformFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&, Args...)>;
 
-const MatTransformFunc& getFuncDeriv(const MatTransformFunc& func);
+template<typename... Args>
+MatTransformFunc<Args...> getFuncDeriv(const MatTransformFunc<Args...>& func);
 
 #endif
