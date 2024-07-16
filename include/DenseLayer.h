@@ -1,7 +1,10 @@
 #ifndef DENSELAYER_H
 #define DENSELAYER_H
 
+#include "activations.h"
+
 #include <Eigen/Dense>
+
 
 using MatTransformFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&)>;
 
@@ -16,6 +19,8 @@ private:
 
     Eigen::MatrixXf m_dZ;
     Eigen::MatrixXf m_dA;
+    Eigen::MatrixXf m_dW;
+    Eigen::MatrixXf m_dB;
 
 public:
     DenseLayer(int prevLayerNodes, int curLayerNodes, const MatTransformFunc& activation);
@@ -24,7 +29,7 @@ public:
 
     void forwardProp(Eigen::MatrixXf X);
 
-    void backProp();
+    void backProp(Eigen::MatrixXf nextLayerW, Eigen::MatrixXf nextLayerZ, Eigen::MatrixXf prevLayerA);
 
     void gradDesc(int learningRate);
 
