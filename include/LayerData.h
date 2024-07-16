@@ -1,19 +1,19 @@
 #ifndef LAYER_DATA_H
 #define LAYER_DATA_H
 
+#include "helper_functions/GetFuncDeriv.h"
+
 #include <Eigen/Dense>
 #include <vector>
 
-using MatTransformFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&)>;
-
 struct ConvLayerData{
-    MatTransformFunc activation;
-    MatTransformFunc pool;
+    ActivationFunc activation;
+    PoolFunc pool;
     int kernelSize;
 };
 
 struct DenseLayerData{
-    MatTransformFunc activation;
+    ActivationFunc activation;
     int numNodes;
 };
 

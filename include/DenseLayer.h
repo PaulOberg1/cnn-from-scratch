@@ -1,7 +1,7 @@
 #ifndef DENSELAYER_H
 #define DENSELAYER_H
 
-//#include "helper_functions/GetFuncDeriv.h"
+#include "helper_functions/GetFuncDeriv.h"
 
 #include <Eigen/Dense>
 
@@ -12,7 +12,7 @@ class DenseLayer{
 private:
     Eigen::MatrixXf m_weights;
     Eigen::MatrixXf m_biases;
-    MatTransformFunc m_activation;
+    ActivationFunc m_activation;
 
     Eigen::MatrixXf m_Z;
     Eigen::MatrixXf m_A;
@@ -23,7 +23,7 @@ private:
     Eigen::MatrixXf m_dB;
 
 public:
-    DenseLayer(int prevLayerNodes, int curLayerNodes, const MatTransformFunc& activation);
+    DenseLayer(int prevLayerNodes, int curLayerNodes, const ActivationFunc& activation);
 
     void initWeights(int prevLayerNodes, int curLayerNodes);
 

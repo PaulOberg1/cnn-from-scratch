@@ -1,6 +1,6 @@
 #include "DenseLayer.h"
 
-DenseLayer::DenseLayer(int prevLayerNodes, int curLayerNodes, const MatTransformFunc& activation) : m_activation(activation) {
+DenseLayer::DenseLayer(int prevLayerNodes, int curLayerNodes, const ActivationFunc& activation) : m_activation(activation) {
     initWeights(prevLayerNodes,curLayerNodes);
 }
 
@@ -16,7 +16,7 @@ void DenseLayer::forwardProp(Eigen::MatrixXf X) {
 
 void DenseLayer::backProp(Eigen::MatrixXf nextLayerW, Eigen::MatrixXf nextLayerZ, Eigen::MatrixXf prevLayerA) {
 
-    MatTransformFunc activationDerivative = getInverse(m_activation);
+    ActivationFunc activationDerivative = getActFuncDeriv(m_activation);
 
     m_dA = nextLayerW * nextLayerZ;
     m_dZ = activationDerivative(m_A) * m_dA;

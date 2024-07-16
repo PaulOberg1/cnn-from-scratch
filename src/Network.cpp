@@ -7,8 +7,8 @@ Network::Network(const LayerData& layerData, Eigen::MatrixXf X) {
     DenseLayerData d1Data = layerData.d1Data;
     DenseLayerData d2Data = layerData.d2Data;
     
-    m_convLayer1 = new ConvLayer(1, c1Data.kernelSize, c1Data.activation, c1Data.pool);
-    m_convLayer2 = new ConvLayer(1, c2Data.kernelSize, c2Data.activation, c2Data.pool);
+    m_convLayer1 = new ConvLayer(1, c1Data.kernelSize, c1Data.activation, c1Data.pool, 2, 2);
+    m_convLayer2 = new ConvLayer(1, c2Data.kernelSize, c2Data.activation, c2Data.pool,2, 2);
 
     std::pair<int,int> XDims(X.cols(),X.rows());
     std::pair<int,int> C1OutDims = m_convLayer1->getOutputSize(XDims);
