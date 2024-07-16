@@ -27,9 +27,9 @@ public:
     
     void gradDesc();
     
-    Eigen::MatrixXf getZ();
     Eigen::MatrixXf getA();
-    Eigen::MatrixXf getP();
+
+    std::pair<int,int> ConvLayer::getOutputSize(std::pair<int,int> inputDims);
 };
 
 #endif

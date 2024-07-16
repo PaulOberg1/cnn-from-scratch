@@ -3,11 +3,13 @@
 
 #include "ConvLayer.h"
 #include "DenseLayer.h"
+#include "LayerData.h"
 
 #include <map>
 #include <string>
 #include <utility>
 #include <Eigen/Dense>
+
 
 class Network{
 private:
@@ -17,7 +19,7 @@ private:
     DenseLayer* m_denseLayer2;
 
 public:
-    Network(int Conv1Nodes, int Conv2Nodes, int Dense1Nodes, int Dense2Nodes);
+    Network(const LayerData& layerData, Eigen::MatrixXf X);
 
     void run(Eigen::MatrixXf X);
 
