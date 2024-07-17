@@ -6,7 +6,7 @@ DenseLayer::DenseLayer(int prevLayerNodes, int curLayerNodes, const ActivationFu
 
 void DenseLayer::initWeights(int prevLayerNodes, int curLayerNodes) {
     m_weights = Eigen::MatrixXf::Random(curLayerNodes,prevLayerNodes);
-    m_biases = Eigen::MatrixXf::Random(curLayerNodes);
+    m_biases = Eigen::MatrixXf::Random(curLayerNodes,1);
 }
 
 void DenseLayer::forwardProp(Eigen::MatrixXf X) {

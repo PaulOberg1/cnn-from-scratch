@@ -34,7 +34,7 @@ const Eigen::MatrixXf& deriveReLU(const Eigen::MatrixXf& mat) {
 
     for (int i=0; i<cols; i++) {
         for (int j=0; j<rows; j++)
-            outMat[i,j] = mat[i,j] > 0;
+            outMat(i,j) = mat(i,j) > 0;
     }
     return outMat;
 }
