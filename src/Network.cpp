@@ -22,7 +22,7 @@ Network::Network(const LayerData& layerData, Eigen::MatrixXf X) {
 void Network::run(Eigen::MatrixXf X, Eigen::MatrixXf Y, int numIterations, int learningRate) {
     for (int i=0; i<numIterations; i++) {
         Eigen::MatrixXf y_pred = forwardProp(X);
-        backProp();
+        backProp(X,Y);
         gradDesc(learningRate);
     }
 }
@@ -36,7 +36,17 @@ Eigen::MatrixXf Network::forwardProp(Eigen::MatrixXf X) {
     return m_denseLayer2->getA();
 }
 
-void Network::backProp() {}
+void Network::backProp(Eigen::MatrixXf X, Eigen::MatrixXf Y) {
+
+    m_denseLayer2->backProp(Y,m_denseLayer2->getA());
+
+    m_denseLayer1->backProp(m_denseLayer2->getW(), m_denseLayer2->getDz(), m_convLayer2->getA());
+
+    m_convLayer2->backProp(m_denseLayer1->getW(),m_denseLayer1->getDz(),m_convLayer1->getA());
+
+    m_convLayer1->backProp(m_convLayer2->getK(), m_convLayer2->getDz(), X);
+
+}
 
 void Network::gradDesc(int learningRate) {
     m_convLayer1->gradDesc(learningRate);

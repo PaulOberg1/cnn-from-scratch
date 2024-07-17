@@ -25,7 +25,7 @@ public:
 
     Eigen::MatrixXf forwardProp(Eigen::MatrixXf X);
 
-    void backProp();
+    void backProp(Eigen::MatrixXf X, Eigen::MatrixXf Y);
 
     void gradDesc(int learningRate);
 };
