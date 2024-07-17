@@ -29,12 +29,16 @@ public:
 
     void forwardProp(Eigen::MatrixXf X);
 
-    void backProp(Eigen::MatrixXf nextLayerW, Eigen::MatrixXf nextLayerZ, Eigen::MatrixXf prevLayerA);
+    void backProp(Eigen::MatrixXf nextLayerW, Eigen::MatrixXf nextLayerDz, Eigen::MatrixXf prevLayerA);
+    void backProp(Eigen::MatrixXf Y, Eigen::MatrixXf prevLayerA);
 
     void gradDesc(int learningRate);
 
     Eigen::MatrixXf getZ();
     Eigen::MatrixXf getA();
+    Eigen::MatrixXf getW();
+
+    Eigen::MatrixXf getDz();
 };
 
 #endif
