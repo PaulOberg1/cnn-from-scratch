@@ -18,14 +18,17 @@ private:
     DenseLayer* m_denseLayer1;
     DenseLayer* m_denseLayer2;
 
+    Eigen::MatrixXf m_X;
+    Eigen::MatrixXf m_Y;
+
 public:
-    Network(const LayerData& layerData, Eigen::MatrixXf X);
+    Network(const LayerData& layerData, Eigen::MatrixXf X, Eigen::MatrixXf Y);
 
-    void run(Eigen::MatrixXf X, Eigen::MatrixXf Y, int numIterations, int learningRate);
+    const Eigen::MatrixXf& run(int numIterations, int learningRate);
 
-    Eigen::MatrixXf forwardProp(Eigen::MatrixXf X);
+    Eigen::MatrixXf forwardProp();
 
-    void backProp(Eigen::MatrixXf X, Eigen::MatrixXf Y);
+    void backProp();
 
     void gradDesc(int learningRate);
 };
