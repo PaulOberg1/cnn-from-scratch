@@ -8,16 +8,16 @@ Network::Network(const LayerData& layerData, Eigen::MatrixXf X, Eigen::MatrixXf 
     DenseLayerData d1Data = layerData.d1Data;
     DenseLayerData d2Data = layerData.d2Data;
     
-    m_convLayer1 = new ConvLayer(1, c1Data.kernelSize, c1Data.activation, c1Data.pool, 2, 2);
-    m_convLayer2 = new ConvLayer(1, c2Data.kernelSize, c2Data.activation, c2Data.pool,2, 2);
+    m_convLayer1 = std::make_unique<ConvLayer>(1, c1Data.kernelSize, c1Data.activation, c1Data.pool, 2, 2);
+    m_convLayer2 = std::make_unique<ConvLayer>(1, c2Data.kernelSize, c2Data.activation, c2Data.pool,2, 2);
 
     std::pair<int,int> XDims(X.cols(),X.rows());
     std::pair<int,int> C1OutDims = m_convLayer1->getOutputSize(XDims);
     std::pair<int,int> C2OutDims = m_convLayer2->getOutputSize(C1OutDims);
     int flattenedOutputSize = C2OutDims.first * C2OutDims.second;
 
-    m_denseLayer1 = new DenseLayer(flattenedOutputSize, d1Data.numNodes, d1Data.activation);
-    m_denseLayer2 = new DenseLayer(d1Data.numNodes, d2Data.numNodes, d2Data.activation);
+    m_denseLayer1 = std::make_unique<DenseLayer>(flattenedOutputSize, d1Data.numNodes, d1Data.activation);
+    m_denseLayer2 = std::make_unique<DenseLayer>(d1Data.numNodes, d2Data.numNodes, d2Data.activation);
 }
 
 Eigen::MatrixXf Network::run(int numIterations, int learningRate) {

@@ -13,10 +13,10 @@
 
 class Network{
 private:
-    ConvLayer* m_convLayer1;
-    ConvLayer* m_convLayer2;
-    DenseLayer* m_denseLayer1;
-    DenseLayer* m_denseLayer2;
+    std::unique_ptr<ConvLayer> m_convLayer1;
+    std::unique_ptr<ConvLayer> m_convLayer2;
+    std::unique_ptr<DenseLayer> m_denseLayer1;
+    std::unique_ptr<DenseLayer> m_denseLayer2;
 
     Eigen::MatrixXf m_X;
     Eigen::MatrixXf m_Y;
