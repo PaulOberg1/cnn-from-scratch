@@ -7,7 +7,7 @@
 using ActivationFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&)>;
 using PoolFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&, int, int)>;
 
-const ActivationFunc& getActFuncDeriv(const ActivationFunc& func);
-const PoolFunc& getPoolFuncDeriv(const PoolFunc& func);
+ActivationFunc getActFuncDeriv(const ActivationFunc& func);
+PoolFunc getPoolFuncDeriv(const PoolFunc& func);
 
 #endif

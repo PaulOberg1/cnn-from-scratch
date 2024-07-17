@@ -20,7 +20,7 @@ Network::Network(const LayerData& layerData, Eigen::MatrixXf X, Eigen::MatrixXf 
     m_denseLayer2 = new DenseLayer(d1Data.numNodes, d2Data.numNodes, d2Data.activation);
 }
 
-const Eigen::MatrixXf& Network::run(int numIterations, int learningRate) {
+Eigen::MatrixXf Network::run(int numIterations, int learningRate) {
     for (int i=0; i<numIterations; i++) {
         Eigen::MatrixXf y_pred = forwardProp();
         backProp();

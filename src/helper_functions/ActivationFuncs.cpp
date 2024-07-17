@@ -1,6 +1,6 @@
 #include "helper_functions/ActivationFuncs.h"
 
-const Eigen::MatrixXf& sigmoid(const Eigen::MatrixXf& mat) {
+Eigen::MatrixXf sigmoid(const Eigen::MatrixXf& mat) {
     Eigen::MatrixXf returnMat;
     returnMat.resize(mat.rows(), mat.cols());
     for (int i=0; i<returnMat.rows(); i++) {
@@ -11,7 +11,7 @@ const Eigen::MatrixXf& sigmoid(const Eigen::MatrixXf& mat) {
     return returnMat;
 }
 
-const Eigen::MatrixXf& ReLU(const Eigen::MatrixXf& mat) {
+Eigen::MatrixXf ReLU(const Eigen::MatrixXf& mat) {
     Eigen::MatrixXf returnMat;
     returnMat.resize(mat.rows(), mat.cols());
     for (int i=0; i<returnMat.rows(); i++) {
@@ -22,12 +22,12 @@ const Eigen::MatrixXf& ReLU(const Eigen::MatrixXf& mat) {
     return returnMat;
 }
 
-const Eigen::MatrixXf& deriveSigmoid(const Eigen::MatrixXf& mat) {
+Eigen::MatrixXf deriveSigmoid(const Eigen::MatrixXf& mat) {
     Eigen::MatrixXf sig = sigmoid(mat);
     return sig.array() * (1.0f - sig.array());
 }
 
-const Eigen::MatrixXf& deriveReLU(const Eigen::MatrixXf& mat) {
+Eigen::MatrixXf deriveReLU(const Eigen::MatrixXf& mat) {
     int cols = mat.cols();
     int rows = mat.rows();
     Eigen::MatrixXf outMat(cols,rows);
