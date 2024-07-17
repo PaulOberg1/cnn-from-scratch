@@ -31,8 +31,8 @@ void DenseLayer::backProp(Eigen::MatrixXf Y, Eigen::MatrixXf prevLayerA) {
 }
 
 void DenseLayer::gradDesc(int learningRate) {
-    m_Z -= learningRate*m_dZ;
-    m_A -= learningRate*m_dA;
+    m_weights -= learningRate*m_dW;
+    m_biases -= learningRate*m_dB;
 }
 
 Eigen::MatrixXf DenseLayer::getZ() {

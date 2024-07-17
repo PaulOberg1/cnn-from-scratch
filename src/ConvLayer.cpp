@@ -27,9 +27,8 @@ void ConvLayer::backProp(Eigen::MatrixXf nextLayerW, Eigen::MatrixXf nextLayerDz
 }
     
 void ConvLayer::gradDesc(int learningRate) {
-    m_Z -= learningRate*m_dZ;
-    m_A -= learningRate*m_dA;
-    m_P -= learningRate*m_dP;
+    m_kernels -= learningRate*m_dK;
+    m_biases -= learningRate*m_dB;
 }
 
 Eigen::MatrixXf ConvLayer::getZ() {
