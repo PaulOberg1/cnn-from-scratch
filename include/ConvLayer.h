@@ -22,6 +22,8 @@ private:
     Eigen::MatrixXf m_dZ;
     Eigen::MatrixXf m_dA;
     Eigen::MatrixXf m_dP;;
+    Eigen::MatrixXf m_dK;
+    Eigen::MatrixXf m_dB;
 
 public:
     ConvLayer(int prevMatLength, int kernelLength, const ActivationFunc& activation, const PoolFunc& pool, int poolStride=2, int poolSize=2);
@@ -30,15 +32,21 @@ public:
 
     void forwardProp(Eigen::MatrixXf X);
 
-    void backProp();
+    void backProp(Eigen::MatrixXf nextLayerW, Eigen::MatrixXf nextLayerDz, Eigen::MatrixXf layerInputMat);
     
     void gradDesc(int learningRate);
     
     Eigen::MatrixXf getZ();
     Eigen::MatrixXf getA();
     Eigen::MatrixXf getP();
+    Eigen::MatrixXf getK();
+
+    Eigen::MatrixXf getDz();
 
     std::pair<int,int> getOutputSize(std::pair<int,int> inputDims);
-};
 
+    const Eigen::MatrixXf& convolve(const Eigen::MatrixXf& inputMat, const Eigen::MatrixXf& grad);
+    const Eigen::MatrixXf& convolve(const Eigen::MatrixXf& inputMat, const Eigen::MatrixXf& grad, const Eigen::MatrixXf biases);
+
+};
 #endif
