@@ -1,6 +1,6 @@
 #include "ConvLayer.h"
 
-ConvLayer::ConvLayer(int prevMatLength, int kernelLength, const ActivationFunc& activation, const PoolFunc& pool, int poolStride=2, int poolSize=2) 
+ConvLayer::ConvLayer(int prevMatLength, int kernelLength, const ActivationFunc& activation, const PoolFunc& pool, int poolStride, int poolSize) 
     : m_activation(activation), m_pool(pool), m_poolStride(poolStride), m_poolSize(poolSize) {
         initWeights(prevMatLength,kernelLength);
 }

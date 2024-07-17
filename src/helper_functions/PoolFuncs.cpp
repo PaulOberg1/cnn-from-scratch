@@ -1,6 +1,6 @@
 #include "helper_functions/PoolFuncs.h"
 
-const Eigen::MatrixXf& avgPool(const Eigen::MatrixXf& mat, int stride=2, int poolSize=2) {
+const Eigen::MatrixXf& avgPool(const Eigen::MatrixXf& mat, int stride, int poolSize) {
     int rows = mat.rows();
     int cols = mat.cols();
 
@@ -17,7 +17,7 @@ const Eigen::MatrixXf& avgPool(const Eigen::MatrixXf& mat, int stride=2, int poo
     return returnMat;
 }
 
-const Eigen::MatrixXf& maxPool(const Eigen::MatrixXf& mat, int stride=2, int poolSize=2) {
+const Eigen::MatrixXf& maxPool(const Eigen::MatrixXf& mat, int stride, int poolSize) {
     int rows = mat.rows();
     int cols = mat.cols();
 
@@ -34,7 +34,7 @@ const Eigen::MatrixXf& maxPool(const Eigen::MatrixXf& mat, int stride=2, int poo
     return returnMat;
 }
 
-const Eigen::MatrixXf& deriveAvgPool(const Eigen::MatrixXf& mat, int stride=2, int poolSize=2) {
+const Eigen::MatrixXf& deriveAvgPool(const Eigen::MatrixXf& mat, int stride, int poolSize) {
     int rows = mat.rows();
     int cols = mat.cols();
 
@@ -53,7 +53,7 @@ const Eigen::MatrixXf& deriveAvgPool(const Eigen::MatrixXf& mat, int stride=2, i
     return returnMat;
 }
 
-const Eigen::MatrixXf& deriveMaxPool(const Eigen::MatrixXf& mat, int stride=2, int poolSize=2) {
+const Eigen::MatrixXf& deriveMaxPool(const Eigen::MatrixXf& mat, int stride, int poolSize) {
     int rows = mat.rows();
     int cols = mat.cols();
 
