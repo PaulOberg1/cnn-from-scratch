@@ -7,7 +7,7 @@ ConvLayer::ConvLayer(int prevMatLength, int kernelLength, const ActivationFunc& 
 
 void ConvLayer::initWeights(int prevMatLength, int kernelLength) {
     m_kernels = Eigen::MatrixXf::Random(kernelLength,kernelLength);
-    m_biases = Eigen::MatrixXf::Random(1+prevMatLength-kernelLength);
+    m_biases = Eigen::MatrixXf::Random(1,1+prevMatLength-kernelLength);
 }
 
 void ConvLayer::forwardProp(Eigen::MatrixXf X) {
