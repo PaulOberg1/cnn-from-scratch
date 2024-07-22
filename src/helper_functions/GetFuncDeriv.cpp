@@ -2,8 +2,23 @@
 #include "helper_functions/ActivationFuncs.h"
 #include "helper_functions/PoolFuncs.h"
 
+struct FuncHasher {
+    template <typename T>
+    std::size_t operator()(const T& func) const {
+        return std::hash<const void*>()(func.target<void>());
+    }
+};
+
+struct FuncEqual {
+    template <typename T>
+    bool operator()(const T& func1, const T& func2) const {
+        return func1.target<void>() == func2.target<void>();
+    }
+
+};
+
 ActivationFunc getActFuncDeriv(const ActivationFunc& func) {
-    std::unordered_map<ActivationFunc, ActivationFunc> actFuncDerivMap{
+    static std::unordered_map<ActivationFunc, ActivationFunc, FuncHasher, FuncEqual> actFuncDerivMap{
         {sigmoid,deriveSigmoid},
         {ReLU,deriveReLU}
     };
@@ -11,7 +26,7 @@ ActivationFunc getActFuncDeriv(const ActivationFunc& func) {
 }
 
 PoolFunc getPoolFuncDeriv(const PoolFunc& func) {
-    std::unordered_map<PoolFunc, PoolFunc> poolFuncDerivMap{
+    static std::unordered_map<PoolFunc, PoolFunc, FuncHasher, FuncEqual> poolFuncDerivMap{
         {avgPool,deriveAvgPool},
         {maxPool,deriveMaxPool}
     };
