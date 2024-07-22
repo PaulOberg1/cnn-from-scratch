@@ -46,7 +46,7 @@ Eigen::MatrixXf deriveAvgPool(const Eigen::MatrixXf& mat, int stride, int poolSi
 
     for (int i=0; i<rows; i++) {
         for (int j=0; j<cols; j++) {
-            float gradValue = mat[i,j] / float(poolSize*poolSize);
+            float gradValue = mat(i,j) / float(poolSize*poolSize);
             returnMat.block(i*stride, j*stride, poolSize, poolSize).array()+=gradValue;
         }
     }
@@ -62,7 +62,7 @@ Eigen::MatrixXf deriveMaxPool(const Eigen::MatrixXf& mat, int stride, int poolSi
     for (int i=0; i<rows; i++) {
         for (int j=0; j<cols; j++) {
             float maxVal = mat.block(i/stride, j/stride, poolSize, poolSize).maxCoeff();
-            returnMat(i,j) = (mat[i,j] == maxVal) ? 1.0f : 0.0f;
+            returnMat(i,j) = (mat(i,j) == maxVal) ? 1.0f : 0.0f;
         }
     }
     return returnMat;
