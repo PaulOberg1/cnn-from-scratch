@@ -13,6 +13,10 @@ include_directories(${EIGEN_PATH} include)
 
 # Source files
 file(GLOB SOURCES "src/*.cpp")
+file(GLOB SUBDIR_SOURCES "src/helper_functions/*.cpp")
+
+set(SOURCES ${SOURCES} ${SUBDIR_SOURCES})
+
 
 # Add executable target
 add_executable(EggSpector ${SOURCES} src/main.cpp)
