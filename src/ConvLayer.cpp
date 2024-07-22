@@ -60,7 +60,7 @@ std::pair<int,int> ConvLayer::getOutputSize(std::pair<int,int> inputDims) {
 
     int rows = P.rows();
     int cols = P.cols();
-    return std::pair(cols,rows);
+    return std::pair(rows,cols);
 }
 
 Eigen::MatrixXf ConvLayer::convolve(const Eigen::MatrixXf& inputMat, const Eigen::MatrixXf& grad) {

@@ -1,10 +1,13 @@
 #include "helper_functions/ActivationFuncs.h"
 
 Eigen::MatrixXf sigmoid(const Eigen::MatrixXf& mat) {
-    Eigen::MatrixXf returnMat;
-    returnMat.resize(mat.rows(), mat.cols());
-    for (int i=0; i<returnMat.rows(); i++) {
-        for (int j=0; j<returnMat.cols(); j++) {
+    int rows = mat.rows();
+    int cols = mat.cols();
+
+    Eigen::MatrixXf returnMat (rows,cols);
+
+    for (int i=0; i<rows; i++) {
+        for (int j=0; j<cols; j++) {
             returnMat(i,j) = 1 / (1 + std::exp(-mat(i,j)));
         }
     }
@@ -12,10 +15,13 @@ Eigen::MatrixXf sigmoid(const Eigen::MatrixXf& mat) {
 }
 
 Eigen::MatrixXf ReLU(const Eigen::MatrixXf& mat) {
-    Eigen::MatrixXf returnMat;
-    returnMat.resize(mat.rows(), mat.cols());
-    for (int i=0; i<returnMat.rows(); i++) {
-        for (int j=0; j<returnMat.cols(); j++) {
+    int rows = mat.rows();
+    int cols = mat.cols();
+
+    Eigen::MatrixXf returnMat (rows,cols);
+
+    for (int i=0; i<rows; i++) {
+        for (int j=0; j<cols; j++) {
             returnMat(i, j) = mat(i,j) > 0 ? mat(i,j) : 0;
         }
     }
@@ -28,12 +34,13 @@ Eigen::MatrixXf deriveSigmoid(const Eigen::MatrixXf& mat) {
 }
 
 Eigen::MatrixXf deriveReLU(const Eigen::MatrixXf& mat) {
-    int cols = mat.cols();
     int rows = mat.rows();
-    Eigen::MatrixXf outMat(cols,rows);
+    int cols = mat.cols();
+    
+    Eigen::MatrixXf outMat(rows,cols);
 
-    for (int i=0; i<cols; i++) {
-        for (int j=0; j<rows; j++)
+    for (int i=0; i<rows; i++) {
+        for (int j=0; j<cols; j++)
             outMat(i,j) = mat(i,j) > 0;
     }
     return outMat;
