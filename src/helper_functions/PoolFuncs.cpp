@@ -34,7 +34,7 @@ Eigen::MatrixXf maxPool(const Eigen::MatrixXf& mat, int stride, int poolSize) {
     return returnMat;
 }
 
-Eigen::MatrixXf deriveAvgPool(const Eigen::MatrixXf& mat, int stride, int poolSize) {
+Eigen::MatrixXf deriveAvgPool(const Eigen::MatrixXf& mat, const Eigen::MatrixXf& grad, int stride, int poolSize) {
     int rows = mat.rows();
     int cols = mat.cols();
 
@@ -53,7 +53,7 @@ Eigen::MatrixXf deriveAvgPool(const Eigen::MatrixXf& mat, int stride, int poolSi
     return returnMat;
 }
 
-Eigen::MatrixXf deriveMaxPool(const Eigen::MatrixXf& mat, int stride, int poolSize) {
+Eigen::MatrixXf deriveMaxPool(const Eigen::MatrixXf& mat, const Eigen::MatrixXf& grad, int stride, int poolSize) {
     int rows = mat.rows();
     int cols = mat.cols();
 

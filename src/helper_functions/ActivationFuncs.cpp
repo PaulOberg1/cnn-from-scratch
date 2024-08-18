@@ -15,9 +15,9 @@ Eigen::MatrixXf sigmoid(const Eigen::MatrixXf& mat) {
 }
 
 Eigen::MatrixXf ReLU(const Eigen::MatrixXf& mat) {
+    
     int rows = mat.rows();
     int cols = mat.cols();
-
     Eigen::MatrixXf returnMat (rows,cols);
 
     for (int i=0; i<rows; i++) {
@@ -25,15 +25,16 @@ Eigen::MatrixXf ReLU(const Eigen::MatrixXf& mat) {
             returnMat(i, j) = mat(i,j) > 0 ? mat(i,j) : 0;
         }
     }
+    
     return returnMat;
 }
 
-Eigen::MatrixXf deriveSigmoid(const Eigen::MatrixXf& mat) {
+Eigen::MatrixXf deriveSigmoid(const Eigen::MatrixXf& mat, const Eigen::MatrixXf& grad) {
     Eigen::MatrixXf sig = sigmoid(mat);
-    return sig.array() * (1.0f - sig.array());
+    return sig.array() * (1.0f - sig.array()) * grad.array();
 }
 
-Eigen::MatrixXf deriveReLU(const Eigen::MatrixXf& mat) {
+Eigen::MatrixXf deriveReLU(const Eigen::MatrixXf& mat, const Eigen::MatrixXf& grad) {
     int rows = mat.rows();
     int cols = mat.cols();
     
@@ -43,6 +44,6 @@ Eigen::MatrixXf deriveReLU(const Eigen::MatrixXf& mat) {
         for (int j=0; j<cols; j++)
             outMat(i,j) = mat(i,j) > 0;
     }
-    return outMat;
+    return outMat.array() * grad.array();
 }
 
