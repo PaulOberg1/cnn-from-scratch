@@ -14,21 +14,21 @@ struct FuncEqual {
     bool operator()(const T& func1, const T& func2) const {
         return func1.target<void>() == func2.target<void>();
     }
-
 };
 
-ActivationFunc getActFuncDeriv(const ActivationFunc& func) {
-    static std::unordered_map<ActivationFunc, ActivationFunc, FuncHasher, FuncEqual> actFuncDerivMap{
-        {sigmoid,deriveSigmoid},
-        {ReLU,deriveReLU}
+ActivationFuncDeriv getActFuncDeriv(const ActivationFunc& func) {
+    static const std::unordered_map<ActivationFunc, ActivationFuncDeriv, FuncHasher, FuncEqual> actFuncDerivMap{
+        {sigmoid, deriveSigmoid},
+        {ReLU, deriveReLU}
     };
-    return actFuncDerivMap[func];
+    return actFuncDerivMap.at(func);
 }
 
-PoolFunc getPoolFuncDeriv(const PoolFunc& func) {
-    static std::unordered_map<PoolFunc, PoolFunc, FuncHasher, FuncEqual> poolFuncDerivMap{
-        {avgPool,deriveAvgPool},
-        {maxPool,deriveMaxPool}
+
+PoolFuncDeriv getPoolFuncDeriv(const PoolFunc& func) {
+    static const std::unordered_map<PoolFunc, PoolFuncDeriv, FuncHasher, FuncEqual> poolFuncDerivMap{
+        {avgPool, deriveMaxPool},
+        {maxPool, deriveMaxPool}
     };
-    return poolFuncDerivMap[func];
+    return poolFuncDerivMap.at(func);
 }
