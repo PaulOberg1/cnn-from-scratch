@@ -35,7 +35,7 @@ public:
 
     void backProp(Eigen::MatrixXf nextLayerW, Eigen::MatrixXf nextLayerDz, Eigen::MatrixXf layerInputMat, bool prevLayerConv);
     
-    void gradDesc(int learningRate);
+    void gradDesc(double learningRate);
     
     Eigen::MatrixXf getZ();
     Eigen::MatrixXf getA();
