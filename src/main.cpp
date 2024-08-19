@@ -28,6 +28,7 @@ int main() {
 
     DenseLayerData d2Data;
     d2Data.activation = sigmoid;
+    d2Data.activationDeriv = deriveSigmoid;
     d2Data.numNodes = 1;
 
     LayerData layerData;
@@ -38,11 +39,11 @@ int main() {
 
     Eigen::MatrixXf X = (Eigen::MatrixXf::Random(66,66).array()+1.0f)/2.0f;
     Eigen::MatrixXf Y(1,1);
-    Y << 0.943;
+    Y << 0.8109;
     try{
         Network CNN(layerData,X,Y);
 
-        Eigen::MatrixXf y_pred = CNN.run(100,0.1);
+        Eigen::MatrixXf y_pred = CNN.run(100,0.01);
     } catch (const std::exception& e) {
         std::cerr<<"Caught exception in Network constructor or run method: "<<e.what();
     }
