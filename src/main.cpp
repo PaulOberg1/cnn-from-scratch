@@ -9,16 +9,21 @@
 int main() {
     ConvLayerData c1Data;
     c1Data.activation = ReLU;
+    c1Data.activationDeriv = deriveReLU;
     c1Data.pool = maxPool;
+    c1Data.poolDeriv = deriveMaxPool;
     c1Data.kernelSize=3;
 
     ConvLayerData c2Data;
     c2Data.activation = ReLU;
+    c2Data.activationDeriv = deriveReLU;
     c2Data.pool = maxPool;
+    c2Data.poolDeriv = deriveMaxPool;
     c2Data.kernelSize=3;
 
     DenseLayerData d1Data;
     d1Data.activation = ReLU;
+    d1Data.activationDeriv = deriveReLU;
     d1Data.numNodes = 16;
 
     DenseLayerData d2Data;

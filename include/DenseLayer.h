@@ -12,7 +12,9 @@ class DenseLayer{
 private:
     Eigen::MatrixXf m_weights;
     Eigen::MatrixXf m_biases;
+    
     ActivationFunc m_activation;
+    ActivationFuncDeriv m_activationDeriv;
 
     Eigen::MatrixXf m_Z;
     Eigen::MatrixXf m_A;
@@ -23,7 +25,7 @@ private:
     Eigen::MatrixXf m_dB;
 
 public:
-    DenseLayer(int prevLayerNodes, int curLayerNodes, const ActivationFunc& activation);
+    DenseLayer(int prevLayerNodes, int curLayerNodes, const ActivationFunc& activation, const ActivationFuncDeriv& activationDeriv);
 
     void initWeights(int prevLayerNodes, int curLayerNodes);
 

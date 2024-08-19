@@ -1,8 +1,8 @@
 #include "ConvLayer.h"
 #include <iostream>
 
-ConvLayer::ConvLayer(int prevMatLength, int kernelLength, const ActivationFunc& activation, const PoolFunc& pool, int poolStride, int poolSize) 
-    : m_activation(activation), m_pool(pool), m_poolStride(poolStride), m_poolSize(poolSize) {
+ConvLayer::ConvLayer(int prevMatLength, int kernelLength, const ActivationFunc& activation, const ActivationFuncDeriv& activationDeriv, const PoolFunc& pool, const PoolFuncDeriv& poolDeriv, int poolStride, int poolSize)
+    : m_activation(activation), m_activationDeriv(activationDeriv), m_pool(pool), m_poolDeriv(poolDeriv), m_poolStride(poolStride), m_poolSize(poolSize) {
         initWeights(prevMatLength,kernelLength);
 }
 
@@ -36,9 +36,9 @@ void ConvLayer::backProp(Eigen::MatrixXf nextLayerW, Eigen::MatrixXf nextLayerDz
         else {
             m_dP = convolve(nextLayerDz,nextLayerW,m_kernels.rows()-1);
         }
-        m_dA = getPoolFuncDeriv(m_pool)(m_A, m_dP, m_poolStride, m_poolSize);
+        m_dA = m_poolDeriv(m_A, m_dP, m_poolStride, m_poolSize);
 
-        m_dZ = getActFuncDeriv(m_activation)(m_Z,m_dA);
+        m_dZ = m_activationDeriv(m_Z,m_dA);
 
         m_dK = convolve(layerInputMat,m_dZ,0);
         m_dB = m_dZ;

@@ -1,7 +1,8 @@
 #include "DenseLayer.h"
 #include <iostream>
 
-DenseLayer::DenseLayer(int prevLayerNodes, int curLayerNodes, const ActivationFunc& activation) : m_activation(activation) {
+DenseLayer::DenseLayer(int prevLayerNodes, int curLayerNodes, const ActivationFunc& activation, const ActivationFuncDeriv& activationDeriv) 
+    : m_activation(activation), m_activationDeriv(activationDeriv) {
     initWeights(prevLayerNodes,curLayerNodes);
 }
 
@@ -26,7 +27,7 @@ void DenseLayer::forwardProp(Eigen::MatrixXf X) {
 void DenseLayer::backProp(Eigen::MatrixXf nextLayerW, Eigen::MatrixXf nextLayerDz, Eigen::MatrixXf prevLayerA) {
     try{
         m_dA = nextLayerDz(0,0) * nextLayerW.array();
-        m_dZ = getActFuncDeriv(m_activation)(m_A, m_dA.transpose());
+        m_dZ = m_activationDeriv(m_A, m_dA.transpose());
         m_dW = m_dZ * prevLayerA.transpose();
         
         m_dB = m_dZ;

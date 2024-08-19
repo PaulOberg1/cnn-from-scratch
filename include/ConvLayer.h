@@ -9,9 +9,13 @@ class ConvLayer{
 private:
     Eigen::MatrixXf m_kernels;
     Eigen::MatrixXf m_biases;
-    int m_outputSize;
+    
     ActivationFunc m_activation;
+    ActivationFuncDeriv m_activationDeriv;
     PoolFunc m_pool;
+    PoolFuncDeriv m_poolDeriv;
+
+    int m_outputSize;
 
     int m_poolStride;
     int m_poolSize;
@@ -27,7 +31,7 @@ private:
     Eigen::MatrixXf m_dB;
 
 public:
-    ConvLayer(int prevMatLength, int kernelLength, const ActivationFunc& activation, const PoolFunc& pool, int poolStride=2, int poolSize=2);
+    ConvLayer(int prevMatLength, int kernelLength, const ActivationFunc& activation, const ActivationFuncDeriv& activationDeriv, const PoolFunc& pool, const PoolFuncDeriv& poolDeriv, int poolStride=2, int poolSize=2);
 
     void initWeights(int prevMatLength, int kernelLength);
 

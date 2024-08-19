@@ -8,12 +8,15 @@
 
 struct ConvLayerData{
     ActivationFunc activation;
+    ActivationFuncDeriv activationDeriv;
     PoolFunc pool;
+    PoolFuncDeriv poolDeriv;
     int kernelSize;
 };
 
 struct DenseLayerData{
     ActivationFunc activation;
+    ActivationFuncDeriv activationDeriv;
     int numNodes;
 };
 
