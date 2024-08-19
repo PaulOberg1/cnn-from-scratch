@@ -45,8 +45,8 @@ public:
 
     std::pair<int,int> getOutputSize(std::pair<int,int> inputDims);
 
-    Eigen::MatrixXf convolve(const Eigen::MatrixXf& inputMat, const Eigen::MatrixXf& grad);
-    Eigen::MatrixXf convolve(const Eigen::MatrixXf& inputMat, const Eigen::MatrixXf& grad, const Eigen::MatrixXf biases);
+    Eigen::MatrixXf convolve(const Eigen::MatrixXf& inputMat, const Eigen::MatrixXf& grad, int padding);
+    Eigen::MatrixXf convolve(const Eigen::MatrixXf& inputMat, const Eigen::MatrixXf& grad, const Eigen::MatrixXf biases, int padding);
 
 };
 #endif
