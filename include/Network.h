@@ -18,19 +18,19 @@ private:
     std::unique_ptr<DenseLayer> m_denseLayer1;
     std::unique_ptr<DenseLayer> m_denseLayer2;
 
-    Eigen::MatrixXf m_X;
-    Eigen::MatrixXf m_Y;
+    int m_Xrows;
+    int m_Yrows;
 
 public:
-    Network(const LayerData& layerData, Eigen::MatrixXf X, Eigen::MatrixXf Y);
+    Network(const LayerData& layerData, int Xrows, int Yrows);
 
-    Eigen::MatrixXf run(int numIterations, double learningRate);
+    Eigen::MatrixXf run(int numIterations, double learningRate, Eigen::MatrixXf X, Eigen::MatrixXf Y) const;
 
-    Eigen::MatrixXf forwardProp();
+    Eigen::MatrixXf forwardProp(Eigen::MatrixXf X) const;
 
-    void backProp();
+    void backProp(Eigen::MatrixXf X, Eigen::MatrixXf Y) const;
 
-    void gradDesc(double learningRate);
+    void gradDesc(double learningRate) const;
 };
 
 #endif
