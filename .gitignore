@@ -13,3 +13,6 @@
 
 # Ignore Eigen build artifacts
 /eigen/build/
+
+# Ignore data folder
+/data
