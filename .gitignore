@@ -16,3 +16,5 @@
 
 # Ignore data folder
 /data
+
+/src/network_data
