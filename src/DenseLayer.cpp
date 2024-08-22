@@ -1,5 +1,6 @@
 #include "DenseLayer.h"
 #include <iostream>
+#include <fstream>
 
 DenseLayer::DenseLayer(int prevLayerNodes, int curLayerNodes, const ActivationFunc& activation, const ActivationFuncDeriv& activationDeriv) 
     : m_activation(activation), m_activationDeriv(activationDeriv) {
@@ -67,4 +68,27 @@ Eigen::MatrixXf DenseLayer::getW() {
 
 Eigen::MatrixXf DenseLayer::getDz() {
     return m_dZ;
+}
+
+void DenseLayer::storeData(std::string path) {
+    std::ofstream file(path,std::ios::binary);
+
+    if (file.is_open()) {
+        int w_rows = m_weights.rows();
+        int w_cols = m_weights.cols();
+
+        file.write(reinterpret_cast<char*>(&w_rows),sizeof(int));
+        file.write(reinterpret_cast<char*>(&w_cols),sizeof(int));
+        file.write(reinterpret_cast<const char*>(m_weights.data()),w_rows*w_cols*sizeof(float));
+
+
+        int b_rows = m_biases.rows();
+        int b_cols = m_biases.cols();
+
+        file.write(reinterpret_cast<char*>(&b_rows),sizeof(int));
+        file.write(reinterpret_cast<char*>(&b_cols),sizeof(int));
+        file.write(reinterpret_cast<const char*>(m_biases.data()),b_rows*b_cols*sizeof(float));
+
+        file.close();
+    }
 }

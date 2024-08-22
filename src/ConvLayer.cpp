@@ -1,5 +1,6 @@
 #include "ConvLayer.h"
 #include <iostream>
+#include <fstream>
 
 ConvLayer::ConvLayer(int prevMatLength, int kernelLength, const ActivationFunc& activation, const ActivationFuncDeriv& activationDeriv, const PoolFunc& pool, const PoolFuncDeriv& poolDeriv, int poolStride, int poolSize)
     : m_activation(activation), m_activationDeriv(activationDeriv), m_pool(pool), m_poolDeriv(poolDeriv), m_poolStride(poolStride), m_poolSize(poolSize) {
@@ -148,4 +149,27 @@ Eigen::MatrixXf ConvLayer::convolve(const Eigen::MatrixXf& inputMat, const Eigen
         }
     }
     return returnMat;
+}
+
+void ConvLayer::storeData(std::string path) {
+    std::ofstream file(path,std::ios::binary);
+
+    if (file.is_open()) {
+        int k_rows = m_kernels.rows();
+        int k_cols = m_kernels.cols();
+
+        file.write(reinterpret_cast<char*>(&k_rows),sizeof(int));
+        file.write(reinterpret_cast<char*>(&k_cols),sizeof(int));
+        file.write(reinterpret_cast<const char*>(m_kernels.data()),k_rows*k_cols*sizeof(float));
+
+
+        int b_rows = m_biases.rows();
+        int b_cols = m_biases.cols();
+
+        file.write(reinterpret_cast<char*>(&b_rows),sizeof(int));
+        file.write(reinterpret_cast<char*>(&b_cols),sizeof(int));
+        file.write(reinterpret_cast<const char*>(m_biases.data()),b_rows*b_cols*sizeof(float));
+
+        file.close();
+    }
 }

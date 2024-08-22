@@ -41,6 +41,8 @@ public:
     Eigen::MatrixXf getW();
 
     Eigen::MatrixXf getDz();
+
+    void storeData(std::string path);
 };
 
 #endif
