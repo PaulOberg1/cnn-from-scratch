@@ -5,6 +5,9 @@
 #include <Eigen/Dense>
 #include <opencv2/opencv.hpp>
 #include <filesystem>
+#include <omp.h>
+
+std::vector<std::string> collectFilePaths(std::string path);
 
 void trainMain(std::string path, const Network& CNN);
 

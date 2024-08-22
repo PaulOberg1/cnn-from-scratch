@@ -1,5 +1,14 @@
 #include "trainMain.h"
 
+std::vector<std::string> collectFilePaths(std::string path) {
+    std::vector<std::string> paths;
+    for (const auto& entry : std::filesystem::directory_iterator(path)) {
+        std::string imagePath = entry.path().string();
+        paths.push_back(imagePath);
+    }
+    return paths;
+}
+
 void trainMain(std::string path, const Network& CNN) {
     
     int yVal = 0;
