@@ -3,22 +3,30 @@
 void trainMain(std::string path, const Network& CNN) {
     
     int yVal = 0;
-    for (const std::string& newPath : {path+"/Damaged",path+"/Not Damaged"}) {
-        int count = 0;
-        int limit = 100;
-        for (const auto& entry : std::filesystem::directory_iterator(newPath)) {
-            if (++count>limit)
-                break;
-            std::string imagePath = entry.path().string();
+
+    std::vector<std::vector<std::string>> paths;
+    std::vector<std::string> damagedPaths = collectFilePaths("C:/EggSpector/data/Damaged");
+    std::vector<std::string> unDamagedPaths = collectFilePaths("C:/EggSpector/data/Not Damaged");
+    paths.push_back(damagedPaths);
+    paths.push_back(unDamagedPaths);
+
+
+
+    for (const auto& pathArr : paths) {
+
+        #pragma omp parallel for
+        for (int j=0; j<pathArr.size(); j++) {
+            std::string imagePath = pathArr.at(j);
             cv::Mat img = cv::imread(imagePath, cv::IMREAD_COLOR);
             Eigen::MatrixXf X = imgToMatrix(img,66);
             Eigen::MatrixXf Y (1,1);
             Y << yVal;
 
+            
             Eigen::MatrixXf y_pred = CNN.run(100,0.01,X,Y);
             std::cout<<y_pred;
+            
         }
-        yVal++;
     }
 }
 
