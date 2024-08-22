@@ -31,6 +31,8 @@ public:
     void backProp(Eigen::MatrixXf X, Eigen::MatrixXf Y) const;
 
     void gradDesc(double learningRate) const;
+
+    void storeData() const;
 };
 
 #endif

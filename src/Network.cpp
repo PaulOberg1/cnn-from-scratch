@@ -23,8 +23,8 @@ Eigen::MatrixXf Network::run(int numIterations, double learningRate, Eigen::Matr
         Eigen::MatrixXf y_pred = forwardProp(X);
         backProp(X,Y);
         gradDesc(learningRate);
-        std::cout<<y_pred;
     }
+    std::cout<<"\n\n\n";
     return forwardProp(X);
 }
 
@@ -54,4 +54,11 @@ void Network::gradDesc(double learningRate) const {
     m_convLayer2->gradDesc(learningRate);
     m_denseLayer1->gradDesc(learningRate);
     m_denseLayer2->gradDesc(learningRate);
+}
+
+void Network::storeData() const {
+    m_convLayer1->storeData("./network_data");
+    m_convLayer2->storeData("./network_data");
+    m_denseLayer1->storeData("./network_data");
+    m_denseLayer2->storeData("./network_data");
 }
