@@ -15,8 +15,11 @@ set(OpenCV_DIR "C:/opencv/opencv/build")  # Adjust this path to where OpenCVConf
 # Find OpenCV
 find_package(OpenCV REQUIRED)
 
+# Find OpenMP
+find_package(OpenMP REQUIRED)
+
 # Include directories
-include_directories(${EIGEN_PATH} ${OpenCV_INCLUDE_DIRS} include)
+include_directories(${EIGEN_PATH} ${OpenCV_INCLUDE_DIRS} ${OpenMP_INCLUDE_DIRS} include)
 
 # Source files
 file(GLOB SOURCES "src/*.cpp")
@@ -26,5 +29,10 @@ set(SOURCES ${SOURCES} ${SUBDIR_SOURCES})
 
 add_executable(EggSpector ${SOURCES} src/main.cpp)
 
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(EggSpector PUBLIC ${OpenMP_CXX_LIBRARIES})
+endif()
+
 # Link OpenCV libraries
 target_link_libraries(EggSpector ${OpenCV_LIBS})
+
