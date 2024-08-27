@@ -28,7 +28,7 @@ private:
     std::vector<Eigen::MatrixXf> m_dA;
     std::vector<Eigen::MatrixXf> m_dP;;
     std::vector<std::vector<Eigen::MatrixXf>> m_dK;
-    Eigen::MatrixXf m_dB;
+    Eigen::VectorXf m_dB;
 
 public:
     ConvLayer(int prevMatLength, int kernelLength, const ActivationFunc3D& activation, const ActivationFunc3DDeriv& activationDeriv, const PoolFunc& pool, const PoolFuncDeriv& poolDeriv, int poolStride=2, int poolSize=2);
@@ -38,7 +38,7 @@ public:
     void forwardProp(std::vector<Eigen::MatrixXf> X);
 
     void backProp(std::vector<Eigen::MatrixXf> nextLayerW, std::vector<Eigen::MatrixXf> nextLayerDz, std::vector<Eigen::MatrixXf> layerInputMat);
-    void backProp(Eigen::MatrixXf nextLayerW, std::vector<Eigen::MatrixXf> nextLayerDz, std::vector<Eigen::MatrixXf> layerInputMat);
+    void backProp(Eigen::MatrixXf nextLayerW, Eigen::MatrixXf nextLayerDz, std::vector<Eigen::MatrixXf> layerInputMat);
 
     void gradDesc(double learningRate);
     
@@ -57,8 +57,8 @@ public:
 
     std::vector<Eigen::MatrixXf> convolve(const std::vector<Eigen::MatrixXf>& mat, const std::vector<std::vector<Eigen::MatrixXf>>& kernels, const Eigen::VectorXf& biases);
     std::vector<Eigen::MatrixXf> convolve(const std::vector<Eigen::MatrixXf>& mat, const std::vector<std::vector<Eigen::MatrixXf>>& kernels);
-    //Eigen::MatrixXf convolve(const Eigen::MatrixXf& inputMat, const Eigen::MatrixXf& grad, int padding);
-    //Eigen::MatrixXf convolve(const Eigen::MatrixXf& inputMat, const Eigen::MatrixXf& grad, const Eigen::MatrixXf biases, int padding);
+    Eigen::MatrixXf convolve(const Eigen::MatrixXf& inputMat, const Eigen::MatrixXf& grad, int padding);
+    Eigen::MatrixXf convolve(const Eigen::MatrixXf& inputMat, const Eigen::MatrixXf& grad, const Eigen::MatrixXf biases, int padding);
 
     void storeData(std::string path);
 };
