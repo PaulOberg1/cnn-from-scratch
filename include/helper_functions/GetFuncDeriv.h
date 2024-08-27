@@ -6,10 +6,11 @@
 
 using ActivationFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&)>;
 using ActivationFuncDeriv = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&, const Eigen::MatrixXf&)>;
-using PoolFunc = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&, int, int)>;
-using PoolFuncDeriv = std::function<Eigen::MatrixXf(const Eigen::MatrixXf&, const Eigen::MatrixXf&, int, int)>;
 
-ActivationFuncDeriv getActFuncDeriv(const ActivationFunc& func);
-PoolFuncDeriv getPoolFuncDeriv(const PoolFunc& func);
+using ActivationFunc3D = std::function<std::vector<Eigen::MatrixXf>(const std::vector<Eigen::MatrixXf>&)>;
+using ActivationFunc3DDeriv = std::function<std::vector<Eigen::MatrixXf>(const std::vector<Eigen::MatrixXf>&, const std::vector<Eigen::MatrixXf>&)>;
+
+using PoolFunc = std::function<std::vector<Eigen::MatrixXf>(const std::vector<Eigen::MatrixXf>&, int, int)>;
+using PoolFuncDeriv = std::function<std::vector<Eigen::MatrixXf>(const std::vector<Eigen::MatrixXf>&, const std::vector<Eigen::MatrixXf>&, int, int)>;
 
 #endif
