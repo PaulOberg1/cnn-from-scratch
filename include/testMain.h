@@ -6,6 +6,6 @@
 
 #include <opencv2/opencv.hpp>
 
-double testImg(std::string imgPath, int matSideLength, const Network& CNN);
+double testImg(std::string imgPath, const Network& CNN, std::vector<int> inputMatDimensions);
 
 #endif
