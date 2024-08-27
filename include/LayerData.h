@@ -7,11 +7,11 @@
 #include <vector>
 
 struct ConvLayerData{
-    ActivationFunc activation;
-    ActivationFuncDeriv activationDeriv;
+    ActivationFunc3D activation;
+    ActivationFunc3DDeriv activationDeriv;
     PoolFunc pool;
     PoolFuncDeriv poolDeriv;
-    int kernelSize;
+    std::vector<int> kernelDimensions;
 };
 
 struct DenseLayerData{
