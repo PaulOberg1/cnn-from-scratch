@@ -9,8 +9,8 @@
 
 std::vector<std::string> collectFilePaths(std::string path);
 
-void trainMain(std::string path, const Network& CNN);
+void trainMain(std::string path, const Network& CNN, std::vector<int> inputMatDimensions);
 
-Eigen::MatrixXf imgToMatrix(cv::Mat img, int matSideLength);
+std::vector<Eigen::MatrixXf> imgToMatrix(cv::Mat img, std::vector<int> inputMatDimensions);
 
 #endif
