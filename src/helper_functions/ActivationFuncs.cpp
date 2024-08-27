@@ -83,4 +83,23 @@ Eigen::MatrixXf deriveReLU(const Eigen::MatrixXf& mat, const Eigen::MatrixXf& gr
     }
     return outMat.array() * grad.array();
 }
+std::vector<Eigen::MatrixXf> deriveReLU(const std::vector<Eigen::MatrixXf>& mat, const std::vector<Eigen::MatrixXf>& grad) {
+    int depth = 0;
+    int height = mat.at(0).rows();
+    int width = mat.at(0).cols();
+    
+    std::vector<Eigen::MatrixXf> returnMat(depth);
+    for (int i=0; i<depth; i++) {
+        returnMat.at(i) = Eigen::MatrixXf(height,width);
+    }
 
+    for (int i=0; i<depth; i++) {
+        const Eigen::MatrixXf& subMat = mat.at(i);
+        for (int j=0; j<height; j++) {
+            for (int k=0; k<width; k++) {
+                returnMat.at(i)(j,k) = subMat(j,k) > 0 ? grad.at(i)(j,k) : 0;
+            }
+        }
+    }
+    return returnMat;
+}

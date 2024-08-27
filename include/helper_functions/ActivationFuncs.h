@@ -12,5 +12,6 @@ std::vector<Eigen::MatrixXf> ReLU(const std::vector<Eigen::MatrixXf>& mat);
 Eigen::MatrixXf deriveSigmoid(const Eigen::MatrixXf& mat, const Eigen::MatrixXf& grad);
 
 Eigen::MatrixXf deriveReLU(const Eigen::MatrixXf& mat, const Eigen::MatrixXf& grad);
+std::vector<Eigen::MatrixXf> deriveReLU(const std::vector<Eigen::MatrixXf>& mat, const std::vector<Eigen::MatrixXf>& grad);
 
 #endif
