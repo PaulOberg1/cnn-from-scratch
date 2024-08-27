@@ -60,6 +60,8 @@ public:
     Eigen::MatrixXf convolve(const Eigen::MatrixXf& inputMat, const Eigen::MatrixXf& grad, int padding);
     Eigen::MatrixXf convolve(const Eigen::MatrixXf& inputMat, const Eigen::MatrixXf& grad, const Eigen::MatrixXf biases, int padding);
 
+    std::vector<Eigen::MatrixXf> reshapeTo3D(const Eigen::MatrixXf& oldMat, const std::vector<Eigen::MatrixXf>& newMat);
+
     void storeData(std::string path);
 };
 #endif
