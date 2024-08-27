@@ -15,7 +15,7 @@ private:
     PoolFunc m_pool;
     PoolFuncDeriv m_poolDeriv;
 
-    int m_outputSize;
+    std::vector<int> m_outputSize;
 
     int m_poolStride;
     int m_poolSize;
@@ -31,13 +31,13 @@ private:
     Eigen::VectorXf m_dB;
 
 public:
-    ConvLayer(int prevMatLength, int kernelLength, const ActivationFunc3D& activation, const ActivationFunc3DDeriv& activationDeriv, const PoolFunc& pool, const PoolFuncDeriv& poolDeriv, int poolStride=2, int poolSize=2);
+    ConvLayer(std::vector<int> prevMatDimensions, std::vector<int> kernelDimensions, const ActivationFunc3D& activation, const ActivationFunc3DDeriv& activationDeriv, const PoolFunc& pool, const PoolFuncDeriv& poolDeriv, int poolStride, int poolSize);
 
-    void initWeights(int prevMatLength, int kernelLength);
+    void initWeights(std::vector<int> prevMatDimensions, std::vector<int> kernelDimensions);
 
     void forwardProp(std::vector<Eigen::MatrixXf> X);
 
-    void backProp(std::vector<Eigen::MatrixXf> nextLayerW, std::vector<Eigen::MatrixXf> nextLayerDz, std::vector<Eigen::MatrixXf> layerInputMat);
+    void backProp(std::vector<std::vector<Eigen::MatrixXf>> nextLayerW, std::vector<Eigen::MatrixXf> nextLayerDz, std::vector<Eigen::MatrixXf> layerInputMat);
     void backProp(Eigen::MatrixXf nextLayerW, Eigen::MatrixXf nextLayerDz, std::vector<Eigen::MatrixXf> layerInputMat);
 
     void gradDesc(double learningRate);
@@ -45,15 +45,15 @@ public:
     std::vector<Eigen::MatrixXf> getZ();
     std::vector<Eigen::MatrixXf> getA();
     std::vector<Eigen::MatrixXf> getP();
-    std::vector<Eigen::MatrixXf> getK();
+    std::vector<std::vector<Eigen::MatrixXf>> getK();
 
-    Eigen::MatrixXf getFlattenedP();
+    Eigen::VectorXf getFlattenedP();
 
     std::vector<Eigen::MatrixXf> getDz();
 
-    int getOutputSize();
+    std::vector<int> getOutputSize();
 
-    void calcOutputSize(int prevMatLength);
+    void calcOutputSize(std::vector<int> prevMatDimensions,std::vector<int> kernelDimensions);
 
     std::vector<Eigen::MatrixXf> convolve(const std::vector<Eigen::MatrixXf>& mat, const std::vector<std::vector<Eigen::MatrixXf>>& kernels, const Eigen::VectorXf& biases);
     std::vector<Eigen::MatrixXf> convolve(const std::vector<Eigen::MatrixXf>& mat, const std::vector<std::vector<Eigen::MatrixXf>>& kernels);
@@ -62,6 +62,6 @@ public:
 
     std::vector<Eigen::MatrixXf> reshapeTo3D(const Eigen::MatrixXf& oldMat, const std::vector<Eigen::MatrixXf>& newMat);
 
-    void storeData(std::string path);
+    //void storeData(std::string path);
 };
 #endif
