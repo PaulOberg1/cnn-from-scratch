@@ -13,9 +13,27 @@ Eigen::MatrixXf sigmoid(const Eigen::MatrixXf& mat) {
     }
     return returnMat;
 }
+std::vector<Eigen::MatrixXf> sigmoid(const std::vector<Eigen::MatrixXf>& mat) {
+    int depth = mat.size();
+    int height = mat.at(0).rows();
+    int width = mat.at(0).cols();
+
+    std::vector<Eigen::MatrixXf> returnMat(depth);
+
+    for (int i=0; i<depth; i++)
+        returnMat.at(i) = Eigen::MatrixXf(height,width);
+
+    for (int i=0; i<depth; i++) {
+        const Eigen::MatrixXf& subMat = mat.at(i);
+        for (int j=0; j<height; j++) {
+            for (int k=0; k<width; k++)
+                returnMat.at(i)(j, k) = 1 / (1 + std::exp(-subMat(j,k)));
+        }
+    }
+    return returnMat;
+}
 
 Eigen::MatrixXf ReLU(const Eigen::MatrixXf& mat) {
-    
     int rows = mat.rows();
     int cols = mat.cols();
     Eigen::MatrixXf returnMat (rows,cols);
@@ -26,6 +44,25 @@ Eigen::MatrixXf ReLU(const Eigen::MatrixXf& mat) {
         }
     }
     
+    return returnMat;
+}
+std::vector<Eigen::MatrixXf> ReLU(const std::vector<Eigen::MatrixXf>& mat) {
+    int depth = mat.size();
+    int height = mat.at(0).rows();
+    int width = mat.at(0).cols();
+
+    std::vector<Eigen::MatrixXf> returnMat(depth);
+
+    for (int i=0; i<depth; i++)
+        returnMat.at(i) = Eigen::MatrixXf(height,width);
+
+    for (int i=0; i<depth; i++) {
+        const Eigen::MatrixXf& subMat = mat.at(i);
+        for (int j=0; j<height; j++) {
+            for (int k=0; k<width; k++)
+                returnMat.at(i)(j, k) = subMat(j,k) > 0 ? subMat(j,k) : 0;
+        }
+    }
     return returnMat;
 }
 

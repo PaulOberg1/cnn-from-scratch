@@ -4,8 +4,10 @@
 #include <Eigen/Dense>
 
 Eigen::MatrixXf sigmoid(const Eigen::MatrixXf& mat);
+std::vector<Eigen::MatrixXf> sigmoid(const std::vector<Eigen::MatrixXf>& mat);
 
 Eigen::MatrixXf ReLU(const Eigen::MatrixXf& mat);
+std::vector<Eigen::MatrixXf> ReLU(const std::vector<Eigen::MatrixXf>& mat);
 
 Eigen::MatrixXf deriveSigmoid(const Eigen::MatrixXf& mat, const Eigen::MatrixXf& grad);
 
