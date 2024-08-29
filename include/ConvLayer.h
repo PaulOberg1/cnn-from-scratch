@@ -8,7 +8,7 @@
 class ConvLayer{
 private:
     std::vector<std::vector<Eigen::MatrixXf>> m_kernels;
-    Eigen::MatrixXf m_biases;
+    Eigen::VectorXf m_biases;
     
     ActivationFunc3D m_activation;
     ActivationFunc3DDeriv m_activationDeriv;
