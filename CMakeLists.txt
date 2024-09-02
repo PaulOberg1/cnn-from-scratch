@@ -5,6 +5,8 @@ project(EggSpector)
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /openmp")
+
 
 # Set Eigen path
 set(EIGEN_PATH ${CMAKE_SOURCE_DIR}/eigen/eigen-3.4.0)
