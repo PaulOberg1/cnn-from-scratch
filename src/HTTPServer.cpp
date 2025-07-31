@@ -10,6 +10,7 @@ std::condition_variable queue_cv;
 
 void enqueue_request(int client_fd) {
     std::unique_lock<std::mutex> lock(queue_mutex);
+    request_queue.push(client_fd);
     queue_cv.notify_one();
 }
 
